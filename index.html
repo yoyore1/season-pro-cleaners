@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#071a2b">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E6BA8'/%3E%3Cpath d='M9 9h14v14H9z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M16 9v14M9 16h14' stroke='%2321C7E0' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="/assets/css/fonts.css?v=1">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=1">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=2">
   <meta property="og:title" content="Season Pro Cleaners | Crystal-Clear Windows, GTA">
   <meta property="og:description" content="Streak-free windows & debris-free gutters across the GTA — the ProClean System.">
   <meta property="og:type" content="website">
@@ -157,12 +157,21 @@
         </div>
         <div class="ba glass" data-ba data-reveal>
           <div class="ba__stage">
-            <div class="ba__after"><span class="ba__label">Clear view</span></div>
-            <div class="ba__before" data-ba-before><span class="ba__label ba__label--b">Before</span></div>
+            <img class="ba__img ba__img--after" src="/assets/img/house-wash.jpg" alt="After: streak-free, crystal-clear glass" width="1040" height="650" decoding="async">
+            <div class="ba__before" data-ba-before>
+              <img class="ba__img ba__img--before" src="/assets/img/house-wash-before.jpg" alt="Before: dirty, hazy glass" width="1040" height="650" decoding="async" aria-hidden="true">
+            </div>
+            <span class="ba__label ba__label--after">After</span>
+            <span class="ba__label ba__label--b">Before</span>
             <div class="ba__handle" data-ba-handle><span class="ba__grip"><svg viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
             <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Before / after slider" data-ba-range>
           </div>
-          <p class="ba__note">Demo preview — drop in real SPC job photos and this becomes a true before/after.</p>
+          <div class="ba__tabs" role="group" aria-label="Choose a surface">
+            <button class="ba__tab is-active" type="button" data-after="house-wash" data-before="house-wash-before">Exterior</button>
+            <button class="ba__tab" type="button" data-after="driveway" data-before="driveway-before">Interior</button>
+            <button class="ba__tab" type="button" data-after="roof-after" data-before="roof">Gutters</button>
+            <button class="ba__tab" type="button" data-after="deck-after" data-before="deck">Screens</button>
+          </div>
         </div>
       </div>
     </section>
@@ -253,6 +262,6 @@
     <a class="dock__cta" href="#quote">Free Quote</a>
   </div>
 
-  <script src="/assets/js/main.js?v=1" defer></script>
+  <script src="/assets/js/main.js?v=2" defer></script>
 </body>
 </html>

@@ -64,10 +64,24 @@
     setPos(50);
     let drag = false;
     const fromEvt = (e) => { const r = stage.getBoundingClientRect(); const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left; setPos((x / r.width) * 100); };
+    $$("img", ba).forEach((im) => { im.draggable = false; });
+    stage.addEventListener("dragstart", (e) => e.preventDefault());
     stage.addEventListener("pointerdown", (e) => { e.preventDefault(); drag = true; stage.setPointerCapture?.(e.pointerId); fromEvt(e); });
     stage.addEventListener("pointermove", (e) => { if (drag) fromEvt(e); });
     addEventListener("pointerup", () => { drag = false; });
     if (range) range.addEventListener("input", () => setPos(Number(range.value)));
+
+    // surface tabs
+    const afterImg = $(".ba__img--after", ba), beforeImg = $(".ba__img--before", ba);
+    $$(".ba__tab", ba).forEach((t) => {
+      t.addEventListener("click", () => {
+        $$(".ba__tab", ba).forEach((x) => x.classList.remove("is-active"));
+        t.classList.add("is-active");
+        if (afterImg) afterImg.src = `/assets/img/${t.dataset.after}.jpg`;
+        if (beforeImg) beforeImg.src = `/assets/img/${t.dataset.before}.jpg`;
+        setPos(50);
+      });
+    });
     if (!reduce && "IntersectionObserver" in window) {
       let nudged = false;
       const nio = new IntersectionObserver((es) => es.forEach((e) => {
