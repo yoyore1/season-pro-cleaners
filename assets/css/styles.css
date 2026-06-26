@@ -135,6 +135,16 @@ p{margin:0}
 .step h3{font-size:1.05rem;color:#fff;margin-bottom:.3rem}
 .step p{font-size:.9rem;color:rgba(255,255,255,.72)}
 
+/* ============================ ABOUT ============================ */
+.about{padding:clamp(4rem,8vw,6.5rem) 0}
+.about__inner{display:grid;grid-template-columns:.82fr 1.18fr;gap:3rem;align-items:center}
+.about__media{margin:0;position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;padding:0}
+.about__media img{width:100%;height:100%;object-fit:cover}
+.about__cap{position:absolute;left:12px;bottom:12px;font-size:.72rem;font-weight:700;letter-spacing:.05em;color:#fff;background:rgba(8,40,70,.6);padding:.35rem .65rem;border-radius:8px;backdrop-filter:blur(4px)}
+.about__line{margin-top:1rem;color:var(--muted)}
+.about__cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.8rem}
+@media(max-width:1000px){.about__inner{grid-template-columns:1fr}.about__media{aspect-ratio:4/3;max-height:440px}}
+
 /* ============================ BEFORE/AFTER ============================ */
 .proof{padding:clamp(4rem,8vw,6.5rem) 0}
 .ba{max-width:920px;margin:0 auto;border-radius:var(--radius);padding:14px}
