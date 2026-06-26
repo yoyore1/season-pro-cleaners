@@ -91,10 +91,11 @@ p{margin:0}
 .hero__skyline{position:absolute;left:0;right:0;bottom:0;width:100%;height:42%}
 .hero__drops{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.5px),radial-gradient(rgba(255,255,255,.35) 1px,transparent 1.5px);background-size:90px 90px,140px 140px;background-position:0 0,40px 60px;opacity:.25;animation:drift 26s linear infinite}
 @keyframes drift{to{background-position:90px 90px,180px 200px}}
-.hero__fog{position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(226,240,248,.85),rgba(200,224,238,.7));backdrop-filter:blur(16px) saturate(.8);-webkit-backdrop-filter:blur(16px) saturate(.8);clip-path:inset(0 0 0 0);animation:wipe 1.7s cubic-bezier(.72,0,.28,1) .35s forwards}
-@keyframes wipe{to{clip-path:inset(0 0 0 100%)}}
-.hero__blade{position:absolute;top:-2%;bottom:-2%;left:0;width:5px;z-index:2;background:linear-gradient(#cfeefb,#7fd6ee);border-radius:4px;box-shadow:0 0 22px 6px rgba(120,220,250,.8);opacity:0;animation:blade 1.7s cubic-bezier(.72,0,.28,1) .35s forwards}
-@keyframes blade{8%{opacity:1}100%{left:100%;opacity:0}}
+/* fog wipes via transform (GPU-composited) — NOT clip-path, which re-rasterizes the backdrop blur every frame and stutters on phones */
+.hero__fog{position:absolute;inset:0 -2px 0 0;z-index:-1;background:linear-gradient(120deg,rgba(226,240,248,.88),rgba(200,224,238,.74));backdrop-filter:blur(14px) saturate(.85);-webkit-backdrop-filter:blur(14px) saturate(.85);transform:translate3d(0,0,0);will-change:transform;animation:wipe 1.5s cubic-bezier(.72,0,.28,1) .35s forwards}
+@keyframes wipe{to{transform:translate3d(102%,0,0)}}
+.hero__blade{position:absolute;top:-2%;bottom:-2%;left:-5px;width:5px;z-index:2;background:linear-gradient(#cfeefb,#7fd6ee);border-radius:4px;box-shadow:0 0 22px 6px rgba(120,220,250,.8);opacity:0;will-change:transform,opacity;animation:blade 1.5s cubic-bezier(.72,0,.28,1) .35s forwards}
+@keyframes blade{8%{opacity:1}100%{transform:translate3d(100vw,0,0);opacity:0}}
 .hero__content{position:relative;z-index:3;padding:5rem 22px;opacity:0;transform:translateY(16px);animation:heroIn .8s var(--ease) 1.2s forwards}
 @keyframes heroIn{to{opacity:1;transform:none}}
 .hero__title{font-size:clamp(2.5rem,7vw,5rem);letter-spacing:-.03em;text-shadow:0 2px 30px rgba(4,30,50,.4)}
@@ -233,5 +234,10 @@ p{margin:0}
   .dock{display:flex}
   body{padding-bottom:78px}
   .foot__inner{grid-template-columns:1fr}
+  /* keep the intro buttery on phones: lighter blurs, no idle repaints, no scroll-parallax repaint */
+  .hero__fog{backdrop-filter:blur(9px) saturate(.9);-webkit-backdrop-filter:blur(9px) saturate(.9)}
+  .hero__glow{filter:blur(38px);opacity:.4}
+  .hero__drops{animation:none;opacity:.16}
+  .hero__sky{will-change:auto;transform:none!important}
 }
 @media (min-width:761px){.drawer{display:none!important}}

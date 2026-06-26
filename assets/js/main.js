@@ -12,12 +12,20 @@
 
   /* ---------- header + dock on scroll ---------- */
   const header = $("[data-header]"), dock = $("[data-dock]");
+  // parallax is a perf cost on phones (repaints behind the blurred fog) — desktop only
+  const canParallax = !reduce && matchMedia("(min-width: 761px)").matches && !matchMedia("(pointer: coarse)").matches;
+  const parallaxEls = canParallax ? $$("[data-parallax]") : [];
+  let ticking = false;
   const onScroll = () => {
-    const s = window.scrollY;
-    if (header) header.style.boxShadow = s > 24 ? "0 8px 30px -18px rgba(8,40,70,.55)" : "none";
-    if (dock) dock.classList.toggle("is-visible", s > 600);
-    // parallax
-    if (!reduce) $$("[data-parallax]").forEach((el) => { el.style.transform = `translate3d(0, ${s * 0.18}px, 0)`; });
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const s = window.scrollY;
+      if (header) header.style.boxShadow = s > 24 ? "0 8px 30px -18px rgba(8,40,70,.55)" : "none";
+      if (dock) dock.classList.toggle("is-visible", s > 600);
+      parallaxEls.forEach((el) => { el.style.transform = `translate3d(0, ${s * 0.18}px, 0)`; });
+      ticking = false;
+    });
   };
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
