@@ -1,0 +1,9 @@
+{
+  "name": "season-pro-cleaners",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Season Pro Cleaners — premium animated window & gutter cleaning site (GTA) + serverless lead capture.",
+  "scripts": { "preview": "node _serve.mjs 3600" },
+  "engines": { "node": ">=18" }
+}
